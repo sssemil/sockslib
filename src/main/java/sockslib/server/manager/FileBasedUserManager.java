@@ -16,11 +16,10 @@
 
 package sockslib.server.manager;
 
-import com.google.common.base.Strings;
-import sockslib.utils.PathUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.Strings;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -29,13 +28,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sockslib.utils.PathUtil;
 
 /**
- * The class <code>FileBasedUserManager</code> represents an user manager which can manage users
- * in a file.
+ * The class <code>FileBasedUserManager</code> represents an user manager which can manage users in
+ * a file.
  *
  * @author Youchao Feng
  * @version 1.0
@@ -224,7 +223,6 @@ public class FileBasedUserManager implements UserManager {
       thread = new Thread(this, "AutoReloadService");
       thread.setDaemon(true);
       thread.start();
-      ;
     }
 
     public void stop() {

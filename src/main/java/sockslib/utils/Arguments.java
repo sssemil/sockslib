@@ -14,12 +14,12 @@
 
 package sockslib.utils;
 
-import javax.annotation.Nullable;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import javax.annotation.Nullable;
 
 /**
  * The class <code>Arguments</code> is an argument tool class.
@@ -36,7 +36,7 @@ public final class Arguments {
   public Arguments(final @Nullable String[] args) {
     this.args = args;
     argPositionMap = new HashMap<>();
-    if(args != null) {
+    if (args != null) {
       for (int i = 0; i < args.length; i++) {
         argPositionMap.put(args[i], i);
       }
@@ -79,14 +79,14 @@ public final class Arguments {
     return arg.equals("-h") || arg.equals("--help");
   }
 
-  public String argAt(int index){
+  public String argAt(int index) {
     return argAt(index, null);
   }
 
-  public String argAt(int index, @Nullable String defaultValue){
-    if(args == null || index >= args.length || index < 0){
+  public String argAt(int index, @Nullable String defaultValue) {
+    if (args == null || index >= args.length || index < 0) {
       return defaultValue;
-    }else{
+    } else {
       return args[index];
     }
   }

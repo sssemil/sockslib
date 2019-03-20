@@ -36,8 +36,8 @@ import java.util.Calendar;
 import java.util.Map;
 
 /**
- * The class <code>ReadOnlyResultSet</code> is a wrapper for {@link java.sql.ResultSet}.
- * This is class is read only.
+ * The class <code>ReadOnlyResultSet</code> is a wrapper for {@link java.sql.ResultSet}. This is
+ * class is read only.
  *
  * @author Youchao Feng
  * @version 1.0

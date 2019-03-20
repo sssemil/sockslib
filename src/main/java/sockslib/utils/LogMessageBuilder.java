@@ -31,7 +31,7 @@ public class LogMessageBuilder {
    * Returns a log message.
    *
    * @param bytes Bytes array.
-   * @param type  Message type.
+   * @param type Message type.
    * @return Log message.
    */
   public static String build(byte[] bytes, MsgType type) {
@@ -42,8 +42,8 @@ public class LogMessageBuilder {
    * Returns a log message.
    *
    * @param bytes Bytes array.
-   * @param size  data length in bytes array.
-   * @param type  Message type.
+   * @param size data length in bytes array.
+   * @param type Message type.
    * @return Log message.
    */
   public static String build(byte[] bytes, final int size, MsgType type) {

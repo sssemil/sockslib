@@ -1,5 +1,15 @@
 package sockslib.server;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.net.InetAddress;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sockslib.client.SocksProxy;
@@ -7,24 +17,10 @@ import sockslib.common.SSLConfiguration;
 import sockslib.common.methods.NoAuthenticationRequiredMethod;
 import sockslib.common.methods.SocksMethod;
 import sockslib.common.methods.UsernamePasswordMethod;
-import sockslib.server.io.PipeListener;
 import sockslib.server.listener.PipeInitializer;
 import sockslib.server.listener.SessionListener;
 import sockslib.server.manager.MemoryBasedUserManager;
 import sockslib.server.manager.UserManager;
-
-import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * The class <code>SocksServerBuilder</code> is a tool class to build an {@link SocksProxyServer}.
@@ -55,8 +51,7 @@ public class SocksServerBuilder {
 
   /**
    * Creates a <code>SocksServerBuilder</code> with a <code>Class<? extends {@link
-   * SocksHandler}</code>
-   * instance.
+   * SocksHandler}</code> instance.
    *
    * @param socksHandlerClass <code>java.lang.Class<? extends {@link SocksHandler}</code> instance.
    */
@@ -67,8 +62,8 @@ public class SocksServerBuilder {
   }
 
   /**
-   * Builds a {@link SocksProxyServer} which support SOCKS5 protocol.
-   * This SOCKS5 server will accept all requests from clients with no authentication.
+   * Builds a {@link SocksProxyServer} which support SOCKS5 protocol. This SOCKS5 server will accept
+   * all requests from clients with no authentication.
    *
    * @return Instance of {@link SocksProxyServer}.
    */
@@ -77,8 +72,8 @@ public class SocksServerBuilder {
   }
 
   /**
-   * Builds a {@link SocksProxyServer} which support SOCKS5 protocol bind at a specified port.
-   * This SOCKS5 server will accept all requests from clients with no authentication.
+   * Builds a {@link SocksProxyServer} which support SOCKS5 protocol bind at a specified port. This
+   * SOCKS5 server will accept all requests from clients with no authentication.
    *
    * @param bindPort The port that server listened.
    * @return Instance of {@link SocksProxyServer}.
@@ -91,7 +86,7 @@ public class SocksServerBuilder {
   /**
    * Builds a SSL based {@link SocksProxyServer} with no authentication required.
    *
-   * @param bindPort      The port that server listened.
+   * @param bindPort The port that server listened.
    * @param configuration SSL configuration
    * @return Instance of {@link SocksProxyServer}
    */

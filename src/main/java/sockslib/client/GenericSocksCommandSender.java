@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -13,16 +13,6 @@
  */
 
 package sockslib.client;
-
-import sockslib.common.AddressType;
-import sockslib.common.ProtocolErrorException;
-import sockslib.common.SocksCommand;
-import sockslib.common.SocksException;
-import sockslib.utils.LogMessageBuilder;
-import sockslib.utils.LogMessageBuilder.MsgType;
-import sockslib.utils.UnsignedByte;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -32,6 +22,15 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sockslib.common.AddressType;
+import sockslib.common.ProtocolErrorException;
+import sockslib.common.SocksCommand;
+import sockslib.common.SocksException;
+import sockslib.utils.LogMessageBuilder;
+import sockslib.utils.LogMessageBuilder.MsgType;
+import sockslib.utils.UnsignedByte;
 
 /**
  * The class <code>GenericSocksCommandSender</code> implements {@link SocksCommandSender}.
@@ -57,13 +56,13 @@ public class GenericSocksCommandSender implements SocksCommandSender {
 
   @Override
   public CommandReplyMessage send(Socket socket, SocksCommand command, InetAddress address, int
-      port, int version) throws SocksException, IOException {
+      port, int version) throws IOException {
     return send(socket, command, new InetSocketAddress(address, port), version);
   }
 
   @Override
   public CommandReplyMessage send(Socket socket, SocksCommand command, SocketAddress
-      socketAddress, int version) throws SocksException, IOException {
+      socketAddress, int version) throws IOException {
     if (!(socketAddress instanceof InetSocketAddress)) {
       throw new IllegalArgumentException("Unsupported address type");
     }
@@ -104,7 +103,7 @@ public class GenericSocksCommandSender implements SocksCommandSender {
 
   @Override
   public CommandReplyMessage send(Socket socket, SocksCommand command, String host, int port, int
-      version) throws SocksException, IOException {
+      version) throws IOException {
     final InputStream inputStream = socket.getInputStream();
     final OutputStream outputStream = socket.getOutputStream();
     final int lengthOfHost = host.getBytes().length;
@@ -128,7 +127,7 @@ public class GenericSocksCommandSender implements SocksCommandSender {
   }
 
   @Override
-  public CommandReplyMessage checkServerReply(InputStream inputStream) throws SocksException,
+  public CommandReplyMessage checkServerReply(InputStream inputStream) throws
       IOException {
     byte serverReply = -1;
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -197,7 +196,6 @@ public class GenericSocksCommandSender implements SocksCommandSender {
       }
       logger.debug("Server replied:Address as IPv6:{}", new String(addressBytes));
     }
-
 
     serverReply = receivedData[1];
 

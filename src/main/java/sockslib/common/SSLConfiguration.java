@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,17 +14,9 @@
 
 package sockslib.common;
 
-import com.google.common.base.Strings;
-import sockslib.utils.PathUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.google.common.base.Preconditions.checkNotNull;
 
-import javax.annotation.Nullable;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLServerSocketFactory;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManagerFactory;
+import com.google.common.base.Strings;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,8 +24,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.KeyStore;
 import java.util.Properties;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import javax.annotation.Nullable;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLServerSocketFactory;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManagerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sockslib.utils.PathUtil;
 
 /**
  * The class <code>SSLConfiguration</code> represents a configuration of SSL.
@@ -62,8 +61,8 @@ public class SSLConfiguration {
   }
 
   /**
-   * Creates a {@link SSLConfiguration} instance with a string.<br>
-   * The string should format as: <br>
+   * Creates a {@link SSLConfiguration} instance with a string.<br> The string should format as:
+   * <br>
    * <pre>
    * KEYS_TORE_PATH,KEY_STORE_PASSWORD,TRUST_KEY_STORE_PATH,TRUST_KEY_STORE_PASSWORD,CLIENT_AUTH
    * </pre>
@@ -88,7 +87,7 @@ public class SSLConfiguration {
     return null;
   }
 
-  public static SSLConfiguration load(String filePath) throws FileNotFoundException, IOException {
+  public static SSLConfiguration load(String filePath) throws IOException {
     checkNotNull(filePath, "Argument [filePath] may not be null");
     logger.debug("load SSL configuration file:{}", filePath);
     KeyStoreInfo keyStoreInfo = null;
@@ -120,7 +119,7 @@ public class SSLConfiguration {
     return new SSLConfiguration(keyStoreInfo, trustKeyStoreInfo, clientAuth);
   }
 
-  public static SSLConfiguration loadClassPath(String filePath) throws FileNotFoundException,
+  public static SSLConfiguration loadClassPath(String filePath) throws
       IOException {
     checkNotNull(filePath, "Argument [filePath] may not be null");
     if (!filePath.startsWith(File.separator)) {
@@ -202,7 +201,6 @@ public class SSLConfiguration {
         logger.info("SSL: Trust key store:{}", trustKeyStoreInfo.getKeyStorePath());
       }
       logger.info("SSL: Client authentication:{}", needClientAuth);
-      ;
       return ctx.getServerSocketFactory();
     } catch (Exception e) {
       throw new SSLConfigurationException(e.getMessage());

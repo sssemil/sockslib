@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,27 +14,24 @@
 
 package sockslib.server;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sockslib.client.SocksProxy;
 import sockslib.client.SocksSocket;
 import sockslib.common.ProtocolErrorException;
-import sockslib.common.SocksException;
 import sockslib.common.methods.SocksMethod;
 import sockslib.server.io.Pipe;
-import sockslib.server.io.PipeListener;
 import sockslib.server.io.SocketPipe;
 import sockslib.server.msg.CommandMessage;
 import sockslib.server.msg.CommandResponseMessage;
 import sockslib.server.msg.MethodSelectionMessage;
 import sockslib.server.msg.MethodSelectionResponseMessage;
 import sockslib.server.msg.ServerReply;
-
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 /**
  * The class <code>Socks5Handler</code> represents a handler that can handle SOCKS5 protocol.
@@ -127,7 +124,7 @@ public class Socks5Handler implements SocksHandler {
   }
 
   @Override
-  public void doConnect(Session session, CommandMessage commandMessage) throws SocksException,
+  public void doConnect(Session session, CommandMessage commandMessage) throws
       IOException {
 
     ServerReply reply = null;
@@ -179,7 +176,7 @@ public class Socks5Handler implements SocksHandler {
     Pipe pipe = new SocketPipe(session.getSocket(), socket);
     pipe.setName("SESSION[" + session.getId() + "]");
     pipe.setBufferSize(bufferSize);
-    if(getSocksProxyServer().getPipeInitializer() != null){
+    if (getSocksProxyServer().getPipeInitializer() != null) {
       pipe = getSocksProxyServer().getPipeInitializer().initialize(pipe);
     }
     pipe.start(); // This method will build tow thread to run tow internal pipes.
@@ -198,7 +195,7 @@ public class Socks5Handler implements SocksHandler {
   }
 
   @Override
-  public void doBind(Session session, CommandMessage commandMessage) throws SocksException,
+  public void doBind(Session session, CommandMessage commandMessage) throws
       IOException {
 
     ServerSocket serverSocket = new ServerSocket(commandMessage.getPort());
@@ -233,7 +230,7 @@ public class Socks5Handler implements SocksHandler {
 
   @Override
   public void doUDPAssociate(Session session, CommandMessage commandMessage) throws
-      SocksException, IOException {
+      IOException {
     UDPRelayServer udpRelayServer =
         new UDPRelayServer(((InetSocketAddress) session.getClientAddress()).getAddress(),
             commandMessage.getPort());

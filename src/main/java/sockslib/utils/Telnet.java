@@ -30,8 +30,7 @@ import java.net.SocketAddress;
 public interface Telnet {
 
   /**
-   * Send data to specified remote server and received data form server, finally
-   * close connection.
+   * Send data to specified remote server and received data form server, finally close connection.
    *
    * @param data Data which will be sent to remote server.
    * @param host Remote server's host.
@@ -42,10 +41,9 @@ public interface Telnet {
   byte[] request(final byte[] data, final String host, final int port) throws IOException;
 
   /**
-   * Send data to specified remote server and received data form server, finally
-   * close connection.
+   * Send data to specified remote server and received data form server, finally close connection.
    *
-   * @param data    Data which will be sent to remote server.
+   * @param data Data which will be sent to remote server.
    * @param address Remote server's address.
    * @return Data received from remote server.
    * @throws IOException If any I/O error occurred.

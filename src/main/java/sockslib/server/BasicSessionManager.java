@@ -1,5 +1,8 @@
 package sockslib.server;
 
+import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import sockslib.server.listener.CloseSessionException;
 import sockslib.server.listener.CommandListener;
 import sockslib.server.listener.ExceptionListener;
@@ -7,10 +10,6 @@ import sockslib.server.listener.SessionCloseListener;
 import sockslib.server.listener.SessionCreateListener;
 import sockslib.server.listener.SessionListener;
 import sockslib.server.msg.CommandMessage;
-
-import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The class <code>BasicSessionManager</code> implements {@link SessionManager}
@@ -115,19 +114,19 @@ public class BasicSessionManager implements SessionManager {
     return this;
   }
 
-  public SessionCloseListener removeSessionCloseListener(String name){
+  public SessionCloseListener removeSessionCloseListener(String name) {
     return sessionCloseListenerMap.remove(name);
   }
 
-  public SessionCreateListener removeSessionCreateListener(String name){
+  public SessionCreateListener removeSessionCreateListener(String name) {
     return sessionCreateListenerMap.remove(name);
   }
 
-  public CommandListener removeCommandListener(String name){
+  public CommandListener removeCommandListener(String name) {
     return commandListenerMap.remove(name);
   }
 
-  public ExceptionListener removeExceptionListener(String name){
+  public ExceptionListener removeExceptionListener(String name) {
     return exceptionListenerMap.remove(name);
   }
 

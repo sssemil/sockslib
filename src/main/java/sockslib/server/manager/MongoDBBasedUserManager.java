@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -19,14 +19,13 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.mongodb.client.FindIterable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sockslib.utils.mongo.MongoDBUtil;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The class <code>MongoDBBasedUserManager</code> can manage user in MongoDB.
@@ -66,8 +65,8 @@ public class MongoDBBasedUserManager implements UserManager {
   }
 
   /**
-   * Constructs a {@link MongoDBBasedUserManager} instance with configuration file path.
-   * This constructor will read a specified file.
+   * Constructs a {@link MongoDBBasedUserManager} instance with configuration file path. This
+   * constructor will read a specified file.
    *
    * @param configFile Configuration file path. The path support prefix "classpath:" or "file:".
    */
@@ -78,8 +77,8 @@ public class MongoDBBasedUserManager implements UserManager {
   /**
    * Constructs a {@link MongoDBBasedUserManager} instance.
    *
-   * @param host         Host of MongoDB.
-   * @param port         Port of MongoDB.
+   * @param host Host of MongoDB.
+   * @param port Port of MongoDB.
    * @param databaseName Database name.
    */
   public MongoDBBasedUserManager(String host, int port, String databaseName) {
@@ -99,14 +98,14 @@ public class MongoDBBasedUserManager implements UserManager {
   /**
    * Constructs a {@link MongoDBConfiguration}  instance with some parameters.
    *
-   * @param host         Host of MongoDB.
-   * @param port         Port of MongoDB.
+   * @param host Host of MongoDB.
+   * @param port Port of MongoDB.
    * @param databaseName Database name.
-   * @param username     Username.
-   * @param password     Password.
+   * @param username Username.
+   * @param password Password.
    */
   public MongoDBBasedUserManager(String host, int port, String databaseName, String username,
-                                 String password) {
+      String password) {
     this(new MongoDBUtil(host, port, databaseName, username, password));
   }
 
@@ -131,9 +130,9 @@ public class MongoDBBasedUserManager implements UserManager {
   }
 
   /**
-   * Creates a {@link MongoDBBasedUserManager} instance with no parameters.
-   * This method is same as <code>new MongoDBBasedUserManager("classpath:mongo.properties")</code>.
-   * It will read a configuration file in class path named "mongo.properties".
+   * Creates a {@link MongoDBBasedUserManager} instance with no parameters. This method is same as
+   * <code>new MongoDBBasedUserManager("classpath:mongo.properties")</code>. It will read a
+   * configuration file in class path named "mongo.properties".
    *
    * @return Instance of <code>MongoDBBasedUserManager</code>
    */

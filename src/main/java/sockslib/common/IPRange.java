@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -15,7 +15,6 @@
 package sockslib.common;
 
 import com.google.common.base.Preconditions;
-
 import java.io.Serializable;
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -53,14 +52,15 @@ public class IPRange implements Iterable<IP>, Serializable {
    * Constructs a <code>IpRange</code> instance by given tow IP.
    *
    * @param startIp IP starts.
-   * @param endIp   IP ends.
+   * @param endIp IP ends.
    */
   public IPRange(IP startIp, IP endIp) {
 
     int result = endIp.compareTo(startIp);
-    if (result > 0 || result == 0)
+    if (result > 0 || result == 0) {
       Preconditions.checkArgument(
           result > 0 || result == 0, "maxIP must equal or bigger than minIP");
+    }
 
     this.startIP = startIp;
     this.endIP = endIp;
@@ -150,8 +150,8 @@ public class IPRange implements Iterable<IP>, Serializable {
         ((InetSocketAddress) address).getAddress());
   }
 
-  public boolean contains(InetAddress address){
-    if (address instanceof Inet4Address){
+  public boolean contains(InetAddress address) {
+    if (address instanceof Inet4Address) {
       IP ip = new IP(address.getAddress());
       return contains(ip);
     }

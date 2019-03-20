@@ -1,5 +1,7 @@
 package sockslib.server;
 
+import java.net.Socket;
+import java.util.Map;
 import sockslib.server.listener.CloseSessionException;
 import sockslib.server.listener.CommandListener;
 import sockslib.server.listener.ExceptionListener;
@@ -7,9 +9,6 @@ import sockslib.server.listener.SessionCloseListener;
 import sockslib.server.listener.SessionCreateListener;
 import sockslib.server.listener.SessionListener;
 import sockslib.server.msg.CommandMessage;
-
-import java.net.Socket;
-import java.util.Map;
 
 /**
  * The interface <code>SessionManager</code> represents a session manager.
@@ -54,7 +53,7 @@ public interface SessionManager {
   /**
    * Add a {@link SessionListener}.
    *
-   * @param name     name of {@link SessionListener}.
+   * @param name name of {@link SessionListener}.
    * @param listener instance of {@link SessionListener}.
    */
   void addSessionListener(String name, SessionListener listener);

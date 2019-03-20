@@ -14,14 +14,13 @@
 
 package sockslib.server;
 
-import sockslib.client.SocksProxy;
-import sockslib.common.methods.SocksMethod;
-import sockslib.server.listener.PipeInitializer;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
+import sockslib.client.SocksProxy;
+import sockslib.common.methods.SocksMethod;
+import sockslib.server.listener.PipeInitializer;
 
 /**
  * The interface <code>SocksProxyServer</code> represents a SOCKS server.

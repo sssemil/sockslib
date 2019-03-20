@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,14 +14,13 @@
 
 package sockslib.server.msg;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sockslib.common.AddressType;
 import sockslib.common.NotImplementException;
 import sockslib.utils.SocksUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 /**
  * The class <code>CommandResponseMessage</code> represents a command response message.
@@ -83,10 +82,10 @@ public class CommandResponseMessage implements WritableMessage {
   /**
    * Constructs a {@link CommandResponseMessage}.
    *
-   * @param version     Version
-   * @param reply       Sever reply.
+   * @param version Version
+   * @param reply Sever reply.
    * @param bindAddress Bind IP address.
-   * @param bindPort    Bind port.
+   * @param bindPort Bind port.
    */
   public CommandResponseMessage(int version, ServerReply reply, InetAddress bindAddress, int
       bindPort) {

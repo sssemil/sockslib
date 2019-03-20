@@ -14,9 +14,6 @@
 
 package sockslib.utils;
 
-import sockslib.client.SocksProxy;
-import sockslib.client.SocksSocket;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -26,6 +23,8 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import sockslib.client.SocksProxy;
+import sockslib.client.SocksSocket;
 
 /**
  * The class <code>TCPTelnet</code> implements {@link Telnet} based on TCP protocol.
@@ -49,12 +48,14 @@ public final class TCPTelnet implements Telnet {
     this.proxy = proxy;
   }
 
-  @Override public byte[] request(final byte[] outputBytes, final String host, final int port)
+  @Override
+  public byte[] request(final byte[] outputBytes, final String host, final int port)
       throws IOException {
     return request(outputBytes, new InetSocketAddress(host, port));
   }
 
-  @Override public byte[] request(final byte[] outputBytes, final SocketAddress address)
+  @Override
+  public byte[] request(final byte[] outputBytes, final SocketAddress address)
       throws IOException {
     InputStream inputStream = null;
     OutputStream outputStream = null;

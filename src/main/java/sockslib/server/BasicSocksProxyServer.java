@@ -14,13 +14,7 @@
 
 package sockslib.server;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import sockslib.client.SocksProxy;
-import sockslib.common.methods.SocksMethod;
-import sockslib.common.net.MonitorSocketWrapper;
-import sockslib.common.net.NetworkMonitor;
-import sockslib.server.listener.PipeInitializer;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -30,13 +24,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sockslib.client.SocksProxy;
+import sockslib.common.methods.SocksMethod;
+import sockslib.common.net.MonitorSocketWrapper;
+import sockslib.common.net.NetworkMonitor;
+import sockslib.server.listener.PipeInitializer;
 
 /**
  * The class <code>BasicSocksProxyServer</code> is a implementation of {@link SocksProxyServer}
- * .<br>
- * You can build a SOCKS5 server easily by following codes:<br>
+ * .<br> You can build a SOCKS5 server easily by following codes:<br>
  * <pre>
  * ProxyServer proxyServer = new BasicSocksProxyServer(Socks5Handler.class);
  * proxyServer.start(); // Create a SOCKS5 server bind at 1080.
@@ -142,7 +140,7 @@ public class BasicSocksProxyServer implements SocksProxyServer, Runnable {
    * Constructs a {@link BasicSocksProxyServer} by a {@link SocksHandler} class and a port.
    *
    * @param socketHandlerClass {@link SocksHandler} class.
-   * @param port               The port that SOCKS server will listen.
+   * @param port The port that SOCKS server will listen.
    */
   public BasicSocksProxyServer(Class<? extends SocksHandler> socketHandlerClass, int port) {
     this(socketHandlerClass, port, Executors.newFixedThreadPool(THREAD_NUMBER));
@@ -153,7 +151,7 @@ public class BasicSocksProxyServer implements SocksProxyServer, Runnable {
    * ExecutorService.
    *
    * @param socketHandlerClass {@link SocksHandler} class.
-   * @param executorService    Thread pool.
+   * @param executorService Thread pool.
    */
   public BasicSocksProxyServer(Class<? extends SocksHandler> socketHandlerClass, ExecutorService
       executorService) {
@@ -165,11 +163,11 @@ public class BasicSocksProxyServer implements SocksProxyServer, Runnable {
    * ExecutorService.
    *
    * @param socketHandlerClass {@link SocksHandler} class.
-   * @param port               The port that SOCKS server will listen.
-   * @param executorService    Thread pool.
+   * @param port The port that SOCKS server will listen.
+   * @param executorService Thread pool.
    */
   public BasicSocksProxyServer(Class<? extends SocksHandler> socketHandlerClass, int port,
-                               ExecutorService executorService) {
+      ExecutorService executorService) {
     this.socksHandlerClass =
         checkNotNull(socketHandlerClass, "Argument [socksHandlerClass] may not be null");
     this.executorService =

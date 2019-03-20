@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,21 +14,20 @@
 
 package sockslib.server;
 
-import sockslib.common.SocksException;
-import sockslib.common.net.NetworkMonitor;
-import sockslib.server.msg.ReadableMessage;
-import sockslib.server.msg.WritableMessage;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.Map;
+import sockslib.common.SocksException;
+import sockslib.common.net.NetworkMonitor;
+import sockslib.server.msg.ReadableMessage;
+import sockslib.server.msg.WritableMessage;
 
 /**
- * The class <code>Session</code> represents a session between client with SOCKS server.
- * This class is simple encapsulation of java.net.Socket.
+ * The class <code>Session</code> represents a session between client with SOCKS server. This class
+ * is simple encapsulation of java.net.Socket.
  *
  * @author Youchao Feng
  * @version 1.0
@@ -48,18 +47,18 @@ public interface Session {
    *
    * @param bytes Bytes
    * @throws SocksException If a SOCKS protocol error occurred.
-   * @throws IOException    If an I/O error occurred.
+   * @throws IOException If an I/O error occurred.
    */
   void write(byte[] bytes) throws SocksException, IOException;
 
   /**
    * Writes bytes in output stream.
    *
-   * @param bytes  Bytes
+   * @param bytes Bytes
    * @param offset Offset
    * @param length Bytes length.
    * @throws SocksException If a SOCKS protocol error occurred.
-   * @throws IOException    If an I/O error occurred.
+   * @throws IOException If an I/O error occurred.
    */
   void write(byte[] bytes, int offset, int length) throws SocksException, IOException;
 
@@ -68,7 +67,7 @@ public interface Session {
    *
    * @param message {@link WritableMessage} instance.
    * @throws SocksException If a SOCKS protocol error occurred.
-   * @throws IOException    If an I/O error occurred.
+   * @throws IOException If an I/O error occurred.
    */
   void write(WritableMessage message) throws SocksException, IOException;
 
@@ -78,7 +77,7 @@ public interface Session {
    * @param bytes Buffer which read in.
    * @return Read length
    * @throws SocksException If a SOCKS protocol error occurred.
-   * @throws IOException    If an I/O error occurred.
+   * @throws IOException If an I/O error occurred.
    */
   int read(byte[] bytes) throws SocksException, IOException;
 
@@ -88,7 +87,7 @@ public interface Session {
    * @param message a readable message.
    * @return Read bytes size.
    * @throws SocksException If a SOCKS protocol error occurred.
-   * @throws IOException    If an I/O error occurred.
+   * @throws IOException If an I/O error occurred.
    */
   int read(ReadableMessage message) throws SocksException, IOException;
 

@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,10 +14,8 @@
 
 package sockslib.server.io;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.google.common.base.Preconditions.checkNotNull;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -25,13 +23,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * The class <code>StreamPipe</code> represents a pipe the can transfer data source a input
- * stream destination
- * a output stream.
+ * The class <code>StreamPipe</code> represents a pipe the can transfer data source a input stream
+ * destination a output stream.
  *
  * @author Youchao Feng
  * @version 1.0
@@ -92,7 +90,7 @@ public class StreamPipe implements Runnable, Pipe {
   /**
    * Constructs a Pipe instance with a input stream and a output stream.
    *
-   * @param source      stream where it comes source.
+   * @param source stream where it comes source.
    * @param destination stream where it will be transferred destination.
    */
   public StreamPipe(InputStream source, OutputStream destination) {
@@ -102,9 +100,9 @@ public class StreamPipe implements Runnable, Pipe {
   /**
    * Constructs an instance of {@link StreamPipe}.
    *
-   * @param source      stream where it comes source.
+   * @param source stream where it comes source.
    * @param destination stream where it will be transferred destination.
-   * @param name        Name of {@link StreamPipe}.
+   * @param name Name of {@link StreamPipe}.
    */
   public StreamPipe(InputStream source, OutputStream destination, @Nullable String name) {
     this.source = checkNotNull(source, "Argument [source] may not be null");

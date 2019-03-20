@@ -14,15 +14,14 @@
 
 package sockslib.utils;
 
-import sockslib.client.Socks5DatagramSocket;
-import sockslib.client.SocksProxy;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.Arrays;
+import sockslib.client.Socks5DatagramSocket;
+import sockslib.client.SocksProxy;
 
 /**
  * The class <code>UDPTelnet</code> implements {@link Telnet} based on UDP protocol.
@@ -33,29 +32,30 @@ import java.util.Arrays;
  * @see Telnet
  * @see TCPTelnet
  */
-public final class UDPTelnet implements Telnet{
+public final class UDPTelnet implements Telnet {
 
   private SocksProxy proxy;
 
-  public UDPTelnet(){
+  public UDPTelnet() {
 
   }
 
-  public UDPTelnet(SocksProxy proxy){
+  public UDPTelnet(SocksProxy proxy) {
     this.proxy = proxy;
   }
 
   @Override
-  public byte[] request(final byte[] sendData, final String host, final int port) throws IOException{
+  public byte[] request(final byte[] sendData, final String host, final int port)
+      throws IOException {
     return request(sendData, new InetSocketAddress(host, port));
   }
 
   @Override
-  public byte[] request(final byte[] sendData, final SocketAddress address) throws IOException{
+  public byte[] request(final byte[] sendData, final SocketAddress address) throws IOException {
     DatagramSocket socket = null;
-    if(proxy != null){
+    if (proxy != null) {
       socket = new Socks5DatagramSocket(proxy);
-    }else{
+    } else {
       socket = new DatagramSocket();
     }
     socket.send(new DatagramPacket(sendData, sendData.length, address));

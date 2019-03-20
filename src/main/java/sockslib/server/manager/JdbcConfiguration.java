@@ -16,13 +16,12 @@
 
 package sockslib.server.manager;
 
-import sockslib.utils.PathUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sockslib.utils.PathUtil;
 
 /**
  * The class <code>JdbcConfiguration</code> is a tool class to config JDBC.

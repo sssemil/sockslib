@@ -1,5 +1,12 @@
 package sockslib.quickstart;
 
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetSocketAddress;
+import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sockslib.client.Socks5;
 import sockslib.client.Socks5DatagramSocket;
 import sockslib.common.UsernamePasswordCredentials;
@@ -8,14 +15,6 @@ import sockslib.common.net.NetworkMonitor;
 import sockslib.utils.Arguments;
 import sockslib.utils.ResourceUtil;
 import sockslib.utils.Timer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.annotation.Nullable;
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
 
 /**
  * @author Youchao Feng

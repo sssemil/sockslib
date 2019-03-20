@@ -16,10 +16,8 @@
 
 package sockslib.utils.jdbc;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.google.common.base.Preconditions.checkNotNull;
 
-import javax.sql.DataSource;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Array;
@@ -33,8 +31,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import javax.sql.DataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The class <code>JdbcTemplate</code> is a template for JDBC operation. This class provides some

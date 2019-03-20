@@ -16,10 +16,9 @@
 
 package sockslib.server.manager;
 
+import java.sql.SQLException;
 import sockslib.utils.jdbc.ReadOnlyResultSet;
 import sockslib.utils.jdbc.RowMapper;
-
-import java.sql.SQLException;
 
 /**
  * The class <code>UserRowMapper</code> is a mapper for {@link User}.

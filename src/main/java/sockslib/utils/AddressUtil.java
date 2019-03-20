@@ -1,10 +1,9 @@
 package sockslib.utils;
 
-import sockslib.common.IP;
-
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import sockslib.common.IP;
 
 /**
  * @author Youchao Feng
@@ -13,20 +12,20 @@ import java.net.SocketAddress;
  */
 public class AddressUtil {
 
-  public static IP toIP(SocketAddress socketAddress){
-    if (socketAddress instanceof InetSocketAddress){
+  public static IP toIP(SocketAddress socketAddress) {
+    if (socketAddress instanceof InetSocketAddress) {
       byte[] address = ((InetSocketAddress) socketAddress).getAddress().getAddress();
       return new IP(address);
-    }else{
+    } else {
       throw new IllegalArgumentException("Not support type:" + socketAddress.getClass().getName());
     }
   }
 
-  public static boolean addressIn(SocketAddress address, String ip){
+  public static boolean addressIn(SocketAddress address, String ip) {
     return false;
   }
 
-  public static boolean addressIn(InetAddress address, String ip){
+  public static boolean addressIn(InetAddress address, String ip) {
     return false;
   }
 }

@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,9 +14,8 @@
 
 package sockslib.client;
 
-import sockslib.common.SocksException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,14 +29,13 @@ import java.net.UnknownHostException;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sockslib.common.SocksException;
 
 /**
  * The class <code>SocksSocket</code> is proxy class that help developers use {@link SocksProxy} as
- * same as a java.net.Socket.<br>
- * For example:<br>
+ * same as a java.net.Socket.<br> For example:<br>
  * <pre>
  * SocksProxy proxy = new Socks5(new InetSocketAddress(&quot;127.0.0.1&quot;, 1080));
  * // Setting proxy...
@@ -70,11 +68,11 @@ public class SocksSocket extends Socket {
   /**
    * Create a socket and connect SOCKS Server.
    *
-   * @param proxy            Socks proxy.
+   * @param proxy Socks proxy.
    * @param remoteServerHost Remote sever host.
    * @param remoteServerPort Remote server port.
    * @throws SocksException If any errors about SOCKS protocol occurred.
-   * @throws IOException    If any IO errors occurred.
+   * @throws IOException If any IO errors occurred.
    */
   public SocksSocket(SocksProxy proxy, String remoteServerHost, int remoteServerPort) throws
       SocksException, IOException {
@@ -92,18 +90,18 @@ public class SocksSocket extends Socket {
   /**
    * Same as {@link #SocksSocket(SocksProxy, String, int)}
    *
-   * @param proxy   Socks proxy.
+   * @param proxy Socks proxy.
    * @param address Remote server's IP address.
-   * @param port    Remote server's port.
+   * @param port Remote server's port.
    * @throws SocksException If any error about SOCKS protocol occurs.
-   * @throws IOException    If I/O error occurs.
+   * @throws IOException If I/O error occurs.
    */
   public SocksSocket(SocksProxy proxy, InetAddress address, int port) throws SocksException,
       IOException {
     this(proxy, new InetSocketAddress(address, port));
   }
 
-  public SocksSocket(SocksProxy proxy, SocketAddress socketAddress) throws SocksException,
+  public SocksSocket(SocksProxy proxy, SocketAddress socketAddress) throws
       IOException {
     checkNotNull(proxy, "Argument [proxy] may not be null");
     checkNotNull(socketAddress, "Argument [socketAddress] may not be null");
@@ -132,7 +130,7 @@ public class SocksSocket extends Socket {
   /**
    * Creates a SocksSocket instance with a {@link SocksProxy} and a
    *
-   * @param proxy       SOCKS proxy.
+   * @param proxy SOCKS proxy.
    * @param proxySocket a unconnected socket. it will connect SOCKS server later.
    */
   public SocksSocket(SocksProxy proxy, Socket proxySocket) {
@@ -148,7 +146,7 @@ public class SocksSocket extends Socket {
    * Initialize proxy chain.
    *
    * @throws SocketException If a SOCKS protocol error occurred.
-   * @throws IOException     If an I/O error occurred.
+   * @throws IOException If an I/O error occurred.
    */
   private void initProxyChain() throws SocketException, IOException {
     List<SocksProxy> proxyChain = new ArrayList<SocksProxy>();
@@ -177,7 +175,7 @@ public class SocksSocket extends Socket {
    * @param host Remote server's host.
    * @param port Remote server's port.
    * @throws SocksException If any error about SOCKS protocol occurs.
-   * @throws IOException    If I/O error occurs.
+   * @throws IOException If I/O error occurs.
    */
   public void connect(String host, int port) throws SocksException, IOException {
     this.remoteServerHost = checkNotNull(host, "Argument [host] may not be null");
@@ -189,13 +187,13 @@ public class SocksSocket extends Socket {
 
 
   @Override
-  public void connect(SocketAddress endpoint) throws SocksException, IOException {
+  public void connect(SocketAddress endpoint) throws IOException {
     connect(endpoint, 0);
   }
 
 
   @Override
-  public void connect(SocketAddress endpoint, int timeout) throws SocksException, IOException {
+  public void connect(SocketAddress endpoint, int timeout) throws IOException {
 
     if (!(endpoint instanceof InetSocketAddress)) {
       throw new IllegalArgumentException("Unsupported address type");

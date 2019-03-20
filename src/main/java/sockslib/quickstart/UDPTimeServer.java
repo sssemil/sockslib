@@ -1,16 +1,15 @@
 package sockslib.quickstart;
 
-import sockslib.utils.Arguments;
-import sockslib.utils.Timer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.util.Date;
+import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sockslib.utils.Arguments;
+import sockslib.utils.Timer;
 
 /**
  * @author Youchao Feng

@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,12 +14,6 @@
 
 package sockslib.server;
 
-import sockslib.common.Socks5DatagramPacketHandler;
-import sockslib.common.net.MonitorDatagramSocketWrapper;
-import sockslib.common.net.NetworkMonitor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -27,6 +21,11 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.SocketException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sockslib.common.Socks5DatagramPacketHandler;
+import sockslib.common.net.MonitorDatagramSocketWrapper;
+import sockslib.common.net.NetworkMonitor;
 
 /**
  * The class <code>UDPRelayServer</code> represents a UDP relay server.
@@ -96,7 +95,7 @@ public class UDPRelayServer implements Runnable {
    * server will use client's IP and port to find out where the datagram packet from.
    *
    * @param clientInetAddress Client's IP address.
-   * @param clientPort        Client's port.
+   * @param clientPort Client's port.
    */
   public UDPRelayServer(InetAddress clientInetAddress, int clientPort) {
     this(new InetSocketAddress(clientInetAddress, clientPort));
@@ -180,10 +179,9 @@ public class UDPRelayServer implements Runnable {
       return true;
     }
     // client is in local.
-    else if (packet.getPort() == clientPort && clientAddress.getHostAddress().startsWith("127.")) {
-      return true;
+    else {
+      return packet.getPort() == clientPort && clientAddress.getHostAddress().startsWith("127.");
     }
-    return false;
   }
 
   /**

@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,15 +14,6 @@
 
 package sockslib.server;
 
-import sockslib.common.Credentials;
-import sockslib.common.SocksException;
-import sockslib.common.net.MonitorSocketWrapper;
-import sockslib.common.net.NetworkMonitor;
-import sockslib.server.msg.ReadableMessage;
-import sockslib.server.msg.WritableMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -30,6 +21,13 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sockslib.common.Credentials;
+import sockslib.common.net.MonitorSocketWrapper;
+import sockslib.common.net.NetworkMonitor;
+import sockslib.server.msg.ReadableMessage;
+import sockslib.server.msg.WritableMessage;
 
 /**
  * The class <code>SocksSession</code> represents
@@ -95,22 +93,22 @@ public class SocksSession implements Session {
   }
 
   @Override
-  public void write(byte[] bytes) throws SocksException, IOException {
+  public void write(byte[] bytes) throws IOException {
     write(bytes, 0, bytes.length);
   }
 
   @Override
-  public void write(WritableMessage message) throws SocksException, IOException {
+  public void write(WritableMessage message) throws IOException {
     write(message.getBytes());
   }
 
   @Override
-  public int read(byte[] bytes) throws SocksException, IOException {
+  public int read(byte[] bytes) throws IOException {
     return inputStream.read(bytes);
   }
 
   @Override
-  public int read(ReadableMessage message) throws SocksException, IOException {
+  public int read(ReadableMessage message) throws IOException {
     message.read(inputStream);
     return message.getLength();
   }
@@ -150,7 +148,7 @@ public class SocksSession implements Session {
   }
 
   @Override
-  public void write(byte[] bytes, int offset, int length) throws SocksException, IOException {
+  public void write(byte[] bytes, int offset, int length) throws IOException {
     outputStream.write(bytes, offset, length);
     outputStream.flush();
   }

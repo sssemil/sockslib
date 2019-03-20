@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -13,19 +13,6 @@
  */
 
 package sockslib.client;
-
-import sockslib.common.AnonymousCredentials;
-import sockslib.common.Credentials;
-import sockslib.common.SocksCommand;
-import sockslib.common.SocksException;
-import sockslib.common.UsernamePasswordCredentials;
-import sockslib.common.methods.GssApiMethod;
-import sockslib.common.methods.NoAuthenticationRequiredMethod;
-import sockslib.common.methods.SocksMethod;
-import sockslib.common.methods.SocksMethodRegistry;
-import sockslib.common.methods.UsernamePasswordMethod;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +24,17 @@ import java.net.SocketAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sockslib.common.AnonymousCredentials;
+import sockslib.common.Credentials;
+import sockslib.common.SocksCommand;
+import sockslib.common.UsernamePasswordCredentials;
+import sockslib.common.methods.GssApiMethod;
+import sockslib.common.methods.NoAuthenticationRequiredMethod;
+import sockslib.common.methods.SocksMethod;
+import sockslib.common.methods.SocksMethodRegistry;
+import sockslib.common.methods.UsernamePasswordMethod;
 
 /**
  * The class <code>Socks5</code> has implements SOCKS5 protocol.
@@ -111,8 +109,8 @@ public class Socks5 implements SocksProxy {
    * Constructs a Socks5 instance.
    *
    * @param socketAddress SOCKS5 server's address.
-   * @param username      Username of the authentication.
-   * @param password      Password of the authentication.
+   * @param username Username of the authentication.
+   * @param password Password of the authentication.
    */
   public Socks5(SocketAddress socketAddress, String username, String password) {
     this(socketAddress);
@@ -134,7 +132,7 @@ public class Socks5 implements SocksProxy {
    * Constructs a Socks5 instance.
    *
    * @param inetAddress SOCKS5 server's address.
-   * @param port        SOCKS5 server's port.
+   * @param port SOCKS5 server's port.
    */
   public Socks5(InetAddress inetAddress, int port) {
     this(new InetSocketAddress(inetAddress, port));
@@ -163,8 +161,8 @@ public class Socks5 implements SocksProxy {
   /**
    * Constructs a Socks instance.
    *
-   * @param host        SOCKS5 server's host.
-   * @param port        SOCKS5 server's port.
+   * @param host SOCKS5 server's host.
+   * @param port SOCKS5 server's port.
    * @param credentials credentials.
    * @throws UnknownHostException If the host can't be resolved.
    */
@@ -186,7 +184,7 @@ public class Socks5 implements SocksProxy {
   }
 
   @Override
-  public void buildConnection() throws SocksException, IOException {
+  public void buildConnection() throws IOException {
     if (inetAddress == null) {
       throw new IllegalArgumentException("Please set inetAddress before calling buildConnection.");
     }
@@ -202,7 +200,7 @@ public class Socks5 implements SocksProxy {
   }
 
   @Override
-  public CommandReplyMessage requestConnect(String host, int port) throws SocksException,
+  public CommandReplyMessage requestConnect(String host, int port) throws
       IOException {
     if (!alwaysResolveAddressLocally) {
       // resolve address in SOCKS server
@@ -216,37 +214,37 @@ public class Socks5 implements SocksProxy {
   }
 
   @Override
-  public CommandReplyMessage requestConnect(InetAddress address, int port) throws SocksException,
+  public CommandReplyMessage requestConnect(InetAddress address, int port) throws
       IOException {
     return socksCmdSender.send(proxySocket, SocksCommand.CONNECT, address, port, SOCKS_VERSION);
   }
 
   @Override
-  public CommandReplyMessage requestConnect(SocketAddress address) throws SocksException,
+  public CommandReplyMessage requestConnect(SocketAddress address) throws
       IOException {
     return socksCmdSender.send(proxySocket, SocksCommand.CONNECT, address, SOCKS_VERSION);
   }
 
   @Override
-  public CommandReplyMessage requestBind(String host, int port) throws SocksException, IOException {
+  public CommandReplyMessage requestBind(String host, int port) throws IOException {
     return socksCmdSender.send(proxySocket, SocksCommand.BIND, host, port, SOCKS_VERSION);
   }
 
   @Override
   public CommandReplyMessage requestBind(InetAddress inetAddress, int port) throws
-      SocksException, IOException {
+      IOException {
     return socksCmdSender.send(proxySocket, SocksCommand.BIND, inetAddress, port, SOCKS_VERSION);
   }
 
   @Override
-  public Socket accept() throws SocksException, IOException {
+  public Socket accept() throws IOException {
     CommandReplyMessage messge = socksCmdSender.checkServerReply(proxySocket.getInputStream());
     logger.debug("accept a connection from:{}", messge.getSocketAddress());
     return this.proxySocket;
   }
 
   @Override
-  public CommandReplyMessage requestUdpAssociate(String host, int port) throws SocksException,
+  public CommandReplyMessage requestUdpAssociate(String host, int port) throws
       IOException {
     return socksCmdSender.send(proxySocket, SocksCommand.UDP_ASSOCIATE, new InetSocketAddress
         (host, port), SOCKS_VERSION);
@@ -254,7 +252,7 @@ public class Socks5 implements SocksProxy {
 
   @Override
   public CommandReplyMessage requestUdpAssociate(InetAddress address, int port) throws
-      SocksException, IOException {
+      IOException {
     return socksCmdSender.send(proxySocket, SocksCommand.UDP_ASSOCIATE, new InetSocketAddress
         (address, port), SOCKS_VERSION);
   }

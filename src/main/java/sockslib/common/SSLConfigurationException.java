@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2015-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +37,7 @@ public class SSLConfigurationException extends Exception {
   }
 
   public SSLConfigurationException(String message, Throwable cause, boolean enableSuppression,
-                                   boolean writableStackTrace) {
+      boolean writableStackTrace) {
     super(message, cause, enableSuppression, writableStackTrace);
     // TODO Auto-generated constructor stub
   }
@@ -56,7 +56,6 @@ public class SSLConfigurationException extends Exception {
     super(cause);
     // TODO Auto-generated constructor stub
   }
-
 
 
 }

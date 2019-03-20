@@ -23,4 +23,5 @@ package sockslib.server.listener;
  */
 public interface SessionListener
     extends SessionCreateListener, SessionCloseListener, CommandListener, ExceptionListener {
+
 }

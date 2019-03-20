@@ -23,10 +23,9 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
+import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * The class <code>HashPasswordProtector</code> implements {@link PasswordProtector}. This class
@@ -58,11 +57,11 @@ public class HashPasswordProtector implements PasswordProtector {
     cache =
         CacheBuilder.newBuilder().maximumSize(1000).expireAfterAccess(5, TimeUnit.MINUTES).build
             (new CacheLoader<String, String>() {
-          @Override
-          public String load(String key) throws Exception {
-            return encryptNow(key);
-          }
-        });
+              @Override
+              public String load(String key) throws Exception {
+                return encryptNow(key);
+              }
+            });
   }
 
   @Override

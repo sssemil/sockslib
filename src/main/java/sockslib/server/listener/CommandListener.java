@@ -32,7 +32,6 @@ public interface CommandListener {
    *
    * @param session Current session.
    * @param message The {@link CommandMessage} sent to server.
-   * @throws CloseSessionException
    */
   void onCommand(Session session, CommandMessage message) throws CloseSessionException;
 }

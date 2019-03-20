@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -13,12 +13,6 @@
  */
 
 package sockslib.client;
-
-import sockslib.common.AnonymousCredentials;
-import sockslib.common.Credentials;
-import sockslib.common.SocksException;
-import sockslib.common.UsernamePasswordCredentials;
-import sockslib.common.methods.SocksMethod;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,10 +22,15 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.UnknownHostException;
 import java.util.List;
+import sockslib.common.AnonymousCredentials;
+import sockslib.common.Credentials;
+import sockslib.common.SocksException;
+import sockslib.common.UsernamePasswordCredentials;
+import sockslib.common.methods.SocksMethod;
 
 /**
- * The interface <code>SocksProxy</code> define a SOCKS proxy. it's will be used by
- * {@link SocksSocket} or {@link Socks5DatagramSocket}
+ * The interface <code>SocksProxy</code> define a SOCKS proxy. it's will be used by {@link
+ * SocksSocket} or {@link Socks5DatagramSocket}
  *
  * @author Youchao Feng
  * @version 1.0
@@ -91,12 +90,12 @@ public interface SocksProxy {
   SocksProxy setHost(String host) throws UnknownHostException;
 
   /**
-   * Connect SOCKS server using SOCKS protocol. This method will ask SOCKS server to select
-   * a method from the methods listed by client. If SOCKS server need authentication, it will
-   * do authentication. If SOCKS server select 0xFF,It means that none of the methods listed by the
+   * Connect SOCKS server using SOCKS protocol. This method will ask SOCKS server to select a method
+   * from the methods listed by client. If SOCKS server need authentication, it will do
+   * authentication. If SOCKS server select 0xFF,It means that none of the methods listed by the
    * client are acceptable and this method should throw {@link SocksException}.
    *
-   * @throws IOException    if any IO error occurs.
+   * @throws IOException if any IO error occurs.
    * @throws SocksException if any error about SOCKS protocol occurs.
    */
   void buildConnection() throws IOException, SocksException;
@@ -109,7 +108,7 @@ public interface SocksProxy {
    * @param port Remote server's port.
    * @return The message that reply by SOCKS server.
    * @throws SocksException If any error about SOCKS protocol occurs.
-   * @throws IOException    if any I/O error occurs.
+   * @throws IOException if any I/O error occurs.
    */
   CommandReplyMessage requestConnect(String host, int port) throws SocksException, IOException;
 
@@ -118,10 +117,10 @@ public interface SocksProxy {
    * server.
    *
    * @param address Remote server's address as java.net.InetAddress instance.
-   * @param port    Remote server's port.
+   * @param port Remote server's port.
    * @return The message that reply by SOCKS server.
    * @throws SocksException If any error about SOCKS protocol occurs.
-   * @throws IOException    If any I/O error occurs.
+   * @throws IOException If any I/O error occurs.
    */
   CommandReplyMessage requestConnect(InetAddress address, int port) throws SocksException,
       IOException;
@@ -133,7 +132,7 @@ public interface SocksProxy {
    * @param address Remote server's address as java.net.SocketAddress instance.
    * @return The message that reply by SOCKS server.
    * @throws SocksException If any error about SOCKS protocol occurs.
-   * @throws IOException    If any I/O error occurs.
+   * @throws IOException If any I/O error occurs.
    */
   CommandReplyMessage requestConnect(SocketAddress address) throws SocksException, IOException;
 
@@ -144,7 +143,7 @@ public interface SocksProxy {
    * @param port Remote server's port.
    * @return The message that reply by SOCKS server.
    * @throws SocksException If any error about SOCKS protocol occurs.
-   * @throws IOException    If any I/O error occurs.
+   * @throws IOException If any I/O error occurs.
    */
   CommandReplyMessage requestBind(String host, int port) throws SocksException, IOException;
 
@@ -152,23 +151,22 @@ public interface SocksProxy {
    * This method will send a BIND command to SOKCS server.
    *
    * @param inetAddress Remote server's IP address.
-   * @param port        Remote server's port.
+   * @param port Remote server's port.
    * @return The message that reply by SOCKS server.
    * @throws SocksException If any error about SOCKS protocol occurs.
-   * @throws IOException    If any I/O error occurs.
+   * @throws IOException If any I/O error occurs.
    */
   CommandReplyMessage requestBind(InetAddress inetAddress, int port) throws
       SocksException, IOException;
 
   /**
-   * When server has income connection, this method will read second response message from
-   * SOCKS server. <br>
-   * This method will be blocked if there is no income connection. When there is a income
-   * connection, this method will return a socket that looks like connect the remote host.
+   * When server has income connection, this method will read second response message from SOCKS
+   * server. <br> This method will be blocked if there is no income connection. When there is a
+   * income connection, this method will return a socket that looks like connect the remote host.
    *
    * @return Socket that connect the remote host.
    * @throws SocksException If any error about SOCKS protocol occurs.
-   * @throws IOException    If any I/O error occurs.
+   * @throws IOException If any I/O error occurs.
    */
   Socket accept() throws SocksException, IOException;
 
@@ -180,7 +178,7 @@ public interface SocksProxy {
    * @param port Remote UDP server's port.
    * @return The message that reply by SOCKS server.
    * @throws SocksException If any error about SOCKS protocol occurs.
-   * @throws IOException    If any I/O error occurs.
+   * @throws IOException If any I/O error occurs.
    */
   CommandReplyMessage requestUdpAssociate(String host, int port) throws SocksException, IOException;
 
@@ -189,10 +187,10 @@ public interface SocksProxy {
    * a relay server.
    *
    * @param address Remote UDP server's address.
-   * @param port    Remote UDP server's port.
+   * @param port Remote UDP server's port.
    * @return The message that reply by SOCKS server.
    * @throws SocksException If any error about SOCKS protocol occurs.
-   * @throws IOException    If any I/O error occurs.
+   * @throws IOException If any I/O error occurs.
    */
   CommandReplyMessage requestUdpAssociate(InetAddress address, int port) throws SocksException,
       IOException;
@@ -303,7 +301,7 @@ public interface SocksProxy {
    * Creates a proxy socket.
    *
    * @param address address.
-   * @param port    port.
+   * @param port port.
    * @return Socket instance.
    * @throws IOException If an I\O error occurred.
    */

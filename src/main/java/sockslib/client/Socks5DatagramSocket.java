@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,16 +14,15 @@
 
 package sockslib.client;
 
-import sockslib.common.Socks5DatagramPacketHandler;
-import sockslib.common.SocksException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sockslib.common.Socks5DatagramPacketHandler;
+import sockslib.common.SocksException;
 
 /**
  * The class <code>Socks5DatagramSocket</code> is a DatagramSocket that support SOCKS5 proxy.<br>
@@ -71,7 +70,7 @@ public class Socks5DatagramSocket extends DatagramSocket {
    *
    * @param proxy {@link Socks5} instance.
    * @throws SocksException If any error about SOCKS protocol occurs.
-   * @throws IOException    If any I/O error occurs.
+   * @throws IOException If any I/O error occurs.
    * @see <a href="http://www.ietf.org/rfc/rfc1928.txt">SOCKS Protocol Version 5</a>
    */
   public Socks5DatagramSocket(SocksProxy proxy) throws SocksException, IOException {
@@ -96,13 +95,13 @@ public class Socks5DatagramSocket extends DatagramSocket {
 
 
   @Override
-  public void send(DatagramPacket packet) throws SocksException, IOException {
+  public void send(DatagramPacket packet) throws IOException {
     super.send(datagramPacketHandler.encapsulate(packet, new InetSocketAddress
         (relayServerInetAddress, relayServerPort)));
   }
 
   @Override
-  public synchronized void receive(DatagramPacket packet) throws SocksException, IOException {
+  public synchronized void receive(DatagramPacket packet) throws IOException {
     super.receive(packet);
     datagramPacketHandler.decapsulate(packet);
   }

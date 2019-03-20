@@ -1,11 +1,11 @@
 /*
  * Copyright 2015-2025 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License
  * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
  * or implied. See the License for the specific language governing permissions and limitations under
@@ -14,6 +14,13 @@
 
 package sockslib.common.methods;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sockslib.client.Socks5;
 import sockslib.client.SocksProxy;
 import sockslib.common.AuthenticationException;
@@ -26,14 +33,6 @@ import sockslib.server.msg.UsernamePasswordMessage;
 import sockslib.server.msg.UsernamePasswordResponseMessage;
 import sockslib.utils.LogMessageBuilder;
 import sockslib.utils.LogMessageBuilder.MsgType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 
 /**
@@ -66,8 +65,8 @@ public class UsernamePasswordMethod extends AbstractSocksMethod {
   }
 
   /**
-   * Constructs an instance of {@link UsernamePasswordMethod} with
-   * {@link UsernamePasswordAuthenticator}.
+   * Constructs an instance of {@link UsernamePasswordMethod} with {@link
+   * UsernamePasswordAuthenticator}.
    *
    * @param authenticator Authenticator.
    */
@@ -84,7 +83,7 @@ public class UsernamePasswordMethod extends AbstractSocksMethod {
    * Do authentication.
    */
   @Override
-  public void doMethod(SocksProxy socksProxy) throws SocksException, IOException {
+  public void doMethod(SocksProxy socksProxy) throws IOException {
     checkNotNull(socksProxy, "Argument [socksProxy] may not be null");
     Credentials credentials = socksProxy.getCredentials();
     if (credentials == null || !(credentials instanceof UsernamePasswordCredentials)) {
@@ -98,7 +97,7 @@ public class UsernamePasswordMethod extends AbstractSocksMethod {
     OutputStream outputStream = socksProxy.getOutputStream();
     /*
      * RFC 1929
-     * 
+     *
      * +----+------+----------+------+----------+
      * |VER | ULEN | UNAME | PLEN | PASSWD | |
      * +----+------+----------+------+----------+ | 1 | 1 | 1 to 255 | 1 | 1 to 255 |
@@ -140,7 +139,7 @@ public class UsernamePasswordMethod extends AbstractSocksMethod {
   }
 
   @Override
-  public void doMethod(Session session) throws SocksException, IOException {
+  public void doMethod(Session session) throws IOException {
     checkNotNull(session, "Argument [session] may not be null");
     checkNotNull(authenticator, "Please set an authenticator");
     UsernamePasswordMessage usernamePasswordMessage = new UsernamePasswordMessage();

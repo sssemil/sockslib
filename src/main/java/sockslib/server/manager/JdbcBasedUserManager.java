@@ -16,17 +16,16 @@
 
 package sockslib.server.manager;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.common.base.Strings;
+import java.util.List;
+import javax.sql.DataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sockslib.common.NotImplementException;
 import sockslib.utils.jdbc.JdbcTemplate;
 import sockslib.utils.jdbc.RowMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.sql.DataSource;
-import java.util.List;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * The class <code>JdbcBasedUserManager</code> is JDBC based user manager.

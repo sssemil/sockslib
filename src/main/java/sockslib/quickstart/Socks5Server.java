@@ -1,5 +1,10 @@
 package sockslib.quickstart;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+import java.util.Arrays;
+import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sockslib.client.SSLSocks5;
@@ -19,12 +24,6 @@ import sockslib.server.manager.User;
 import sockslib.server.manager.UserManager;
 import sockslib.utils.Arguments;
 import sockslib.utils.Timer;
-
-import javax.annotation.Nullable;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import java.util.Arrays;
 
 /**
  * The class <code>Socks5Server</code> can create a simple Socks5 server.
@@ -129,12 +128,14 @@ public class Socks5Server {
     }
   }
 
-  private void initPort(Arguments arguments, SocksServerBuilder builder) throws IllegalArgumentException {
+  private void initPort(Arguments arguments, SocksServerBuilder builder)
+      throws IllegalArgumentException {
     int port = arguments.getIntValue(Arrays.asList("-p", "--port"), 1080);
     builder.setBindPort(port);
   }
 
-  private void initAuth(Arguments arguments, SocksServerBuilder builder) throws IllegalArgumentException {
+  private void initAuth(Arguments arguments, SocksServerBuilder builder)
+      throws IllegalArgumentException {
     String authValue = arguments.getValue(Arrays.asList("-a", "--auth"), null);
     if (authValue != null) {
       UserManager userManager = new MemoryBasedUserManager();
@@ -150,7 +151,8 @@ public class Socks5Server {
     }
   }
 
-  private void initSSL(Arguments arguments, SocksServerBuilder builder) throws IllegalArgumentException {
+  private void initSSL(Arguments arguments, SocksServerBuilder builder)
+      throws IllegalArgumentException {
     String sslConfigValue = arguments.getValue(Arrays.asList("-s", "--ssl"), null);
     boolean clientAuth = arguments.hasArgsIn("-l", "--sslClientAuth");
     if (sslConfigValue != null) {

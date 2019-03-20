@@ -15,7 +15,6 @@
 package sockslib.utils;
 
 import com.google.common.base.Charsets;
-
 import java.io.IOException;
 import java.io.InputStream;
 

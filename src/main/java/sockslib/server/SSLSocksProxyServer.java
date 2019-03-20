@@ -14,15 +14,14 @@
 
 package sockslib.server;
 
-import sockslib.common.SSLConfiguration;
-import sockslib.common.SocksException;
-
-import javax.net.ssl.SSLServerSocket;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import javax.net.ssl.SSLServerSocket;
+import sockslib.common.SSLConfiguration;
+import sockslib.common.SocksException;
 
 
 /**
@@ -42,13 +41,13 @@ public class SSLSocksProxyServer extends BasicSocksProxyServer {
   }
 
   public SSLSocksProxyServer(Class<? extends SocksHandler> socketHandlerClass, int port,
-                             ExecutorService executorService, SSLConfiguration configuration) {
+      ExecutorService executorService, SSLConfiguration configuration) {
     super(socketHandlerClass, port, executorService);
     this.configuration = configuration;
   }
 
   public SSLSocksProxyServer(Class<? extends SocksHandler> socketHandlerClass, int port,
-                             SSLConfiguration configuration) {
+      SSLConfiguration configuration) {
     this(socketHandlerClass, port, Executors.newFixedThreadPool(THREAD_NUMBER), configuration);
   }
 
@@ -77,7 +76,8 @@ public class SSLSocksProxyServer extends BasicSocksProxyServer {
 
   public ServerSocket createSSLServer(int port, InetAddress bindAddr) throws Exception {
     SSLServerSocket serverSocket =
-        (SSLServerSocket) configuration.getSSLServerSocketFactory().createServerSocket(port, 50, bindAddr);
+        (SSLServerSocket) configuration.getSSLServerSocketFactory()
+            .createServerSocket(port, 50, bindAddr);
     if (configuration.isNeedClientAuth()) {
       serverSocket.setNeedClientAuth(true);
     } else {
